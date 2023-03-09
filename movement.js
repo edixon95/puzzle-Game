@@ -13,20 +13,20 @@ const playerStats = {
 // Movement and directional context
 
 const playerTurnRight = () => {
-    savePosition()
     playerStats.facing++
     if(playerStats.facing == 4){
         playerStats.facing = 0
     }
+    savePosition()
     exploreCameraRefresh()
 }
 
 const playerTurnLeft = () => {
-    savePosition()
     playerStats.facing--
     if(playerStats.facing == -1){
         playerStats.facing = 3
     }
+    savePosition()
     exploreCameraRefresh()
 }
 
@@ -35,10 +35,10 @@ const playerMoveForward = () => {
         playerStats.y++
     }
     else if(playerStats.facing == 1){
-        playerStats.y--
+        playerStats.x++
     }
     else if(playerStats.facing == 2){
-        playerStats.x++
+        playerStats.y--
     }
     else if(playerStats.facing == 3){
         playerStats.x--
