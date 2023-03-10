@@ -1,6 +1,5 @@
 import { exploreCameraRefresh } from "./imageScript.js"
 import { puzzleCheck } from "./introPuzzle.js"
-import { massLightToggle } from "./introPuzzle.js"
 import { hideLights } from "./introPuzzle.js"
 
 // Player logic
@@ -92,13 +91,15 @@ const doInteract = () => {
         savePosition()
         puzzleCheck()
     }
+
+    console.log(playerStats)
+    console.log(puzzleStats)
 }
 
 // if player in puzzle, set puzzle to 0 and reset the camera and puzzle.
 const goBack = () => {
     if(playerStats.puzzle = !0){
         playerStats.puzzle = 0
-        massLightToggle()
         hideLights()
         savePosition()
         exploreCameraRefresh()
@@ -112,6 +113,9 @@ const goBack = () => {
         puzzleButtonContainer.classList.toggle('hidden')
         lightBacking.classList.add('hidden')
         completeOverlay.classList.add('hidden')
+
+        console.log(playerStats)
+        console.log(puzzleStats)
     }
 }
 

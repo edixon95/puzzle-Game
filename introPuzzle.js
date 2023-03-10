@@ -65,6 +65,7 @@ export const puzzleCheck = () => {
         lightFour.src = puzzleImage.squareLights[4]
         lightFive.src = puzzleImage.squareLights[5]
         lightSix.src = puzzleImage.squareLights[6]
+        massLightToggle()
 
         moveButtonContainer.classList.toggle('hidden')
         puzzleButtonContainer.classList.toggle('hidden')
@@ -115,7 +116,7 @@ const buttonOne = () => {
     else {
         lightSixG = 1
     }
-
+    document.getElementById('lightOverlay').classList.remove('hidden')
     checkComplete()
 }
 
@@ -139,7 +140,7 @@ const buttonTwo = () => {
     else {
         lightFiveG = 1
     }
-
+    document.getElementById('lightOverlay').classList.remove('hidden')
     checkComplete()
 }
 
@@ -172,7 +173,7 @@ const buttonThree = () => {
     else {
         lightFourG = 1
     }
-
+    document.getElementById('lightOverlay').classList.remove('hidden')
     checkComplete()
 }
 
@@ -196,12 +197,12 @@ const buttonFour = () => {
     else {
         lightSixG = 1
     }
-
+    document.getElementById('lightOverlay').classList.remove('hidden')
     checkComplete()
 }
 
 // Reset the puzzle so it's solvable again, though not really needed anymore.
-export const massLightToggle = () => {
+const massLightToggle = () => {
     lightOneG = 0
     lightTwoG = 0
     lightThreeG = 0
@@ -218,6 +219,7 @@ const checkComplete = () => {
         // if puzzle one complete, save 
         setPuzzleNumberOne()
         completeOverlay.src = puzzleImage.complete
+        completeOverlay.classList.remove('hidden')
     }
 }
 
