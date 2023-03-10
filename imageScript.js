@@ -136,9 +136,12 @@ const xAxis = [
     },
 ]
 
+// Update camera, log stats
 export const exploreCameraRefresh = () => {
     const imageCheck = JSON.parse(localStorage.getItem("player")) || {}
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzles")) || {}
     const gameScreen = document.getElementById('gameScreen')
     gameScreen.src = xAxis[imageCheck.x].y[imageCheck.y][imageCheck.facing]
     console.log(imageCheck)
+    console.log(puzzleCheck)
 }

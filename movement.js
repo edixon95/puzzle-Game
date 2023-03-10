@@ -1,4 +1,7 @@
 import { exploreCameraRefresh } from "./imageScript.js"
+import { puzzleCheck } from "./introPuzzle.js"
+import { massLightToggle } from "./introPuzzle.js"
+import { hideLights } from "./introPuzzle.js"
 
 // Player logic
 // Didn't see the point in using north east etc as it would just mean converting with an if statement regardless, or cycling through an array
@@ -8,6 +11,12 @@ const playerStats = {
     x: 3,
     y: 1,
     facing: 0,
+    puzzle: 0,
+}
+
+const puzzleStats = {
+    puzzleOne: 0,
+    puzzleTwo: 0
 }
 
 // Movement and directional context
@@ -53,6 +62,7 @@ const playerMoveForward = () => {
 
 const savePosition = () => {
     localStorage.setItem("player", JSON.stringify(playerStats));
+    localStorage.setItem("puzzles", JSON.stringify(puzzleStats));
 }
 
 const resetPosition = () => {
@@ -74,7 +84,46 @@ const resetPosition = () => {
     }
 }
 
+// all interactable positions will be hard coded here
+const doInteract = () => {
+    const playerPosition = JSON.parse(localStorage.getItem("player")) || {}
+    if(playerPosition.x == 3 && playerPosition.y == 2 && playerPosition.facing == 3){
+        playerStats.puzzle = 1
+        savePosition()
+        puzzleCheck()
+    }
+}
+
+// if player in puzzle, set puzzle to 0 and reset the camera and puzzle.
+const goBack = () => {
+    if(playerStats.puzzle = !0){
+        playerStats.puzzle = 0
+        massLightToggle()
+        hideLights()
+        savePosition()
+        exploreCameraRefresh()
+
+        const moveButtonContainer = document.getElementById('navigationButtons')
+        const puzzleButtonContainer = document.getElementById('puzzleButtons')
+        const lightBacking = document.getElementById('lightOverlay')
+        const completeOverlay = document.getElementById('completeOverlay')
+
+        moveButtonContainer.classList.toggle('hidden')
+        puzzleButtonContainer.classList.toggle('hidden')
+        lightBacking.classList.add('hidden')
+        completeOverlay.classList.add('hidden')
+    }
+}
+
+// Lets the game track which puzzle has been completed.
+export const setPuzzleNumberOne = () => {
+    playerStats.puzzle = 0
+    puzzleStats.puzzleOne = 1
+    savePosition()
+}
 
 document.getElementById('butOne').addEventListener("click", playerTurnLeft )
 document.getElementById('butTwo').addEventListener("click", playerMoveForward)
 document.getElementById('butThree').addEventListener("click", playerTurnRight)
+document.getElementById('butFour').addEventListener("click", doInteract)
+document.getElementById('puzBack').addEventListener("click", goBack)
