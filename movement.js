@@ -1,6 +1,7 @@
 import { exploreCameraRefresh } from "./imageScript.js"
 import { puzzleCheck } from "./introPuzzle.js"
 import { hideLights } from "./introPuzzle.js"
+import { turnOffPuzzle } from "./introPuzzle.js"
 
 // Player logic
 // Didn't see the point in using north east etc as it would just mean converting with an if statement regardless, or cycling through an array
@@ -91,6 +92,11 @@ const doInteract = () => {
         savePosition()
         puzzleCheck()
     }
+    else if(playerPosition.x == 3 && playerPosition.y == 2 && playerPosition.facing == 1){
+        playerStats.puzzle = 2
+        savePosition()
+        puzzleCheck()
+    }
 
     console.log(playerStats)
     console.log(puzzleStats)
@@ -98,10 +104,11 @@ const doInteract = () => {
 
 // if player in puzzle, set puzzle to 0 and reset the camera and puzzle.
 const goBack = () => {
-    if(playerStats.puzzle = !0){
+    if(playerStats.puzzle >= 0){
         playerStats.puzzle = 0
         hideLights()
         savePosition()
+        turnOffPuzzle()
         exploreCameraRefresh()
 
         const moveButtonContainer = document.getElementById('navigationButtons')
@@ -123,6 +130,12 @@ const goBack = () => {
 export const setPuzzleNumberOne = () => {
     playerStats.puzzle = 0
     puzzleStats.puzzleOne = 1
+    savePosition()
+}
+
+export const setPuzzleNumberTwo = () => {
+    playerStats.puzzle = 0
+    puzzleStats.puzzleTwo = 1
     savePosition()
 }
 

@@ -1,6 +1,7 @@
 // This file is very messy, sorry for anyone reading.
 
 import { setPuzzleNumberOne } from "./movement.js"
+import { setPuzzleNumberTwo } from "./movement.js"
 
 // Variables to track puzzle state
 let lightOneG = 0
@@ -9,6 +10,17 @@ let lightThreeG = 0
 let lightFourG = 0
 let lightFiveG = 0
 let lightSixG = 0
+
+// Used puzzle/lights elements for intro puzzles
+const completeOverlay = document.getElementById('completeOverlay')
+const gameScreen = document.getElementById('gameScreen')
+const lightBacking = document.getElementById('lightOverlay')
+const lightOne = document.getElementById('lightOne')
+const lightTwo = document.getElementById('lightTwo')
+const lightThree = document.getElementById('lightThree')
+const lightFour = document.getElementById('lightFour')
+const lightFive = document.getElementById('lightFive')
+const lightSix = document.getElementById('lightSix')
 
 // Object layout for puzzle elements
 const puzzleImage = {
@@ -31,32 +43,11 @@ export const puzzleCheck = () => {
     const playerCheck = JSON.parse(localStorage.getItem("player")) || {}
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzles")) || {}
 
-    const completeOverlay = document.getElementById('completeOverlay')
-    const gameScreen = document.getElementById('gameScreen')
-    const lightBacking = document.getElementById('lightOverlay')
-    const lightOne = document.getElementById('lightOne')
-    const lightTwo = document.getElementById('lightTwo')
-    const lightThree = document.getElementById('lightThree')
-    const lightFour = document.getElementById('lightFour')
-    const lightFive = document.getElementById('lightFive')
-    const lightSix = document.getElementById('lightSix')
-
     const moveButtonContainer = document.getElementById('navigationButtons')
     const puzzleButtonContainer = document.getElementById('puzzleButtons')
 
     // Check if puzzle has already been complete or not
-    if(puzzleCheck.puzzleOne == 1){
-        gameScreen.src = puzzleImage.background
-        lightBacking.src = puzzleImage.squareOverlay
-        completeOverlay.src = puzzleImage.complete
-
-        lightBacking.classList.remove('hidden')
-        completeOverlay.classList.remove('hidden')
-
-        moveButtonContainer.classList.toggle('hidden')
-        puzzleButtonContainer.classList.toggle('hidden')
-    } // If puzzle not complete, grab the object and display the puzzle
-    else if(playerCheck.puzzle == 1){
+    if(playerCheck.puzzle == 1){
         gameScreen.src = puzzleImage.background
         lightBacking.src = puzzleImage.squareOverlay
         lightOne.src = puzzleImage.squareLights[1]
@@ -65,17 +56,53 @@ export const puzzleCheck = () => {
         lightFour.src = puzzleImage.squareLights[4]
         lightFive.src = puzzleImage.squareLights[5]
         lightSix.src = puzzleImage.squareLights[6]
-        massLightToggle()
+            // If puzzle complete, show complete. Else display puzzle.
+        if(puzzleCheck.puzzleOne == 1){
+            gameScreen.src = puzzleImage.background
+            lightBacking.src = puzzleImage.squareOverlay
+            completeOverlay.src = puzzleImage.complete
 
-        moveButtonContainer.classList.toggle('hidden')
-        puzzleButtonContainer.classList.toggle('hidden')
-        hideLights()
-        lightThree.classList.toggle('hidden')
-        lightSix.classList.toggle('hidden')
-        // Puzzle initial state
-        lightThreeG = 1
-        lightSixG = 1
+            lightBacking.classList.remove('hidden')
+            completeOverlay.classList.remove('hidden')
+
+            moveButtonContainer.classList.toggle('hidden')
+            puzzleButtonContainer.classList.toggle('hidden')
+        }
+        else{ 
+            
+            massLightToggle()
+
+            moveButtonContainer.classList.toggle('hidden')
+            puzzleButtonContainer.classList.toggle('hidden')
+            hideLights()
+            lightThree.classList.toggle('hidden')
+            lightSix.classList.toggle('hidden')
+            // Puzzle initial state
+            lightThreeG = 1
+            lightSixG = 1
+        }
     }
+    else if(playerCheck.puzzle == 2){
+        // Select Puzzle Two Lights
+        if(puzzleCheck.puzzleTwo == 1){
+            // Display puzzle two complete
+        }
+        else{
+            // Else, set up puzzle two.
+
+        }
+    }
+}
+
+export const turnOffPuzzle = () => {
+    gameScreen.src = ""
+    lightBacking.src = ""
+    lightOne.src = ""
+    lightTwo.src = ""
+    lightThree.src = ""
+    lightFour.src = ""
+    lightFive.src = ""
+    lightSix.src = ""
 }
 
 export const hideLights = () => {
@@ -88,10 +115,6 @@ export const hideLights = () => {
 // Buttons and logic for puzzle one.
 // These "could" be wrapped in an if/switch to function for each puzzle, but I will probably not do that
 const buttonOne = () => {
-    const lightOne = document.getElementById('lightOne')
-    const lightThree = document.getElementById('lightThree')
-    const lightSix = document.getElementById('lightSix')
-
     lightOne.classList.toggle('hidden')
     lightThree.classList.toggle('hidden')
     lightSix.classList.toggle('hidden')
@@ -121,9 +144,6 @@ const buttonOne = () => {
 }
 
 const buttonTwo = () => {
-    const lightThree = document.getElementById('lightThree')
-    const lightFive = document.getElementById('lightFive')
-    
     lightThree.classList.toggle('hidden')
     lightFive.classList.toggle('hidden')
 
@@ -145,26 +165,22 @@ const buttonTwo = () => {
 }
 
 const buttonThree = () => {
-    const lightTwo = document.getElementById('lightTwo')
-    const lightThree = document.getElementById('lightThree')
-    const lightFour = document.getElementById('lightFour')
-
+    lightOne.classList.toggle('hidden')
     lightTwo.classList.toggle('hidden')
-    lightThree.classList.toggle('hidden')
     lightFour.classList.toggle('hidden')
+
+    if(lightOneG == 1){
+        lightOneG = 0
+    }
+    else {
+        lightOneG = 1
+    }
 
     if(lightTwoG == 1){
         lightTwoG = 0
     }
     else {
         lightTwoG = 1
-    }
-
-    if(lightThreeG == 1){
-        lightThreeG = 0
-    }
-    else {
-        lightThreeG = 1
     }
 
     if(lightFourG == 1){
@@ -178,17 +194,22 @@ const buttonThree = () => {
 }
 
 const buttonFour = () => {
-    const lightThree = document.getElementById('lightThree')
-    const lightSix = document.getElementById('lightSix')
-
-    lightThree.classList.toggle('hidden')
+    lightTwo.classList.toggle('hidden')
+    lightFour.classList.toggle('hidden')
     lightSix.classList.toggle('hidden')
 
-    if(lightThreeG == 1){
-        lightThreeG = 0
+    if(lightTwoG == 1){
+        lightTwoG = 0
     }
     else {
-        lightThreeG = 1
+        lightTwoG = 1
+    }
+
+    if(lightFourG == 1){
+        lightFourG = 0
+    }
+    else {
+        lightFourG = 1
     }
 
     if(lightSixG == 1){
@@ -213,13 +234,21 @@ const massLightToggle = () => {
 
 // Check if puzzle is in complete state
 const checkComplete = () => {
-    if(lightOneG == 1 && lightTwoG == 1 && lightThreeG == 1 && lightFourG == 1 && lightFiveG == 1 && lightSixG == 1){
-
-        const completeOverlay = document.getElementById('completeOverlay')
-        // if puzzle one complete, save 
-        setPuzzleNumberOne()
-        completeOverlay.src = puzzleImage.complete
-        completeOverlay.classList.remove('hidden')
+    const playerCheck = JSON.parse(localStorage.getItem("player")) || {}
+    if(playerCheck.puzzle == 1){
+        if(lightOneG == 1 && lightTwoG == 1 && lightThreeG == 1 && lightFourG == 1 && lightFiveG == 1 && lightSixG == 1){
+            const completeOverlay = document.getElementById('completeOverlay')
+            // if puzzle one complete, save 
+            setPuzzleNumberOne()
+            completeOverlay.src = puzzleImage.complete
+            completeOverlay.classList.remove('hidden')
+        }
+    }
+    else if(playerCheck.puzzle == 2){
+        if(lightOneG == 1 && lightTwoG == 1 && lightThreeG == 1 && lightFourG == 1 && lightFiveG == 1 && lightSixG == 1){
+            // Insert puzzletwo check here
+            setPuzzleNumberTwo()
+        }
     }
 }
 
