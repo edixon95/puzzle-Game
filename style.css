@@ -1,33 +1,33 @@
-#gameScreen {
-    width: 50%;
-    z-index: 1;
-}
-
-#screenContainer {
-    position: relative;
-}
-
-#lightOverlay {
-    position: absolute;
-    z-index: 2;
-    width: 50%;
-    left: 0;
-}
-
-.light {
-    position: absolute;
-    z-index: 3;
-    width: 50%;
-    left: 0;
-}
-
-#completeOverlay {
-    position: absolute;
-    z-index: 4;
-    width: 50%;
-    left: 0
+html, body {
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 .hidden {
     display: none;
+}
+
+#screenContainer {
+    margin: auto;
+}
+
+#gameScreen {
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navigationButtons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    
+}
+
+#butOne, #butTwo, #butThree {
+    width: 10%;
+    height: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
