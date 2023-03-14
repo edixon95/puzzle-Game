@@ -23,7 +23,7 @@
     display: flex;
 }
 
-#butOne, #butTwo, #butThree, #startButton, #loadButton {
+#butOne, #butTwo, #butThree, #butFour, #startButton, #loadButton {
     width: 10%;
     height: 3rem;
     margin-left: 1rem;
