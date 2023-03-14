@@ -77,7 +77,51 @@ const resetPosition = () => {
     }
 }
 
+// Load all player progress from localStorage and set the player objects to match.
+const loadGame = () => {
+    const playerFile = JSON.parse(localStorage.getItem("playerTrack")) || {}
+    const PuzzleFile = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
 
+    playerStats.x = playerFile.x
+    playerStats.y = playerFile.y
+    playerStats.facing = playerFile.facing
+    playerStats.puzzle = playerFile.puzzle
+    playerStats.level = playerFile.level
+
+    puzzleStats.currentPuzzle = PuzzleFile.currentPuzzle
+    puzzleStats.puzzleComplete = PuzzleFile.puzzleComplete
+    puzzleStats.puzzleSeq = PuzzleFile.puzzleSeq
+
+    exploreCameraRefresh()
+    document.getElementById('startLoad').classList.add('hidden')
+    document.getElementById('navButton').classList.remove('hidden')
+    document.getElementById('navButton').classList.add('navigationButtons')
+    document.getElementById('startLoad').innerHTML = ""
+}
+
+// Start fresh game
+const startGame = () => {
+    playerStats.x = 3
+    playerStats.y = 1
+    playerStats.facing = 0
+    playerStats.puzzle = false
+    playerStats.level = 1
+
+    puzzleStats.currentPuzzle = 0
+    puzzleStats.puzzleComplete = 0
+    puzzleStats.puzzleSeq = 0
+
+    savePosition()
+    document.getElementById('startLoad').classList.add('hidden')
+    document.getElementById('navButton').classList.remove('hidden')
+    document.getElementById('navButton').classList.add('navigationButtons')
+    document.getElementById('startLoad').innerHTML = ""
+    document.getElementById('gameScreen').src = "./assets/img/levelOne/x3y1f0.jpg"
+}
+
+// Select menu Buttons. This entire div is wiped to remove the event listeners once used.
+document.getElementById('startButton').addEventListener("click", startGame)
+document.getElementById('loadButton').addEventListener("click", loadGame)
 // Select movement buttons
 document.getElementById('butOne').addEventListener("click", playerTurnLeft)
 document.getElementById('butTwo').addEventListener("click", playerMoveForward)

@@ -1,33 +1,32 @@
-html, body {
-    height: 100vh;
-    box-sizing: border-box;
-}
-
 .hidden {
     display: none;
 }
 
 #screenContainer {
-    margin: auto;
+    position: relative;
 }
 
 #gameScreen {
     width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    z-index: 1;
 }
 
-#navigationButtons {
-    display: flex;
+.overlay {
+    position: absolute;
+    z-index: 2;
+    width: 90%;
+    left: 0;
+}
+
+.navigationButtons {
     width: 100%;
-    justify-content: center;
-    
+    display: flex;
 }
 
-#butOne, #butTwo, #butThree {
+#butOne, #butTwo, #butThree, #startButton, #loadButton {
     width: 10%;
     height: 3rem;
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
