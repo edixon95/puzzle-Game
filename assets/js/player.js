@@ -1,6 +1,6 @@
 // Import stuff
 import { exploreCameraRefresh } from "./imageScript.js"
-import { checkInteract } from "./ineraction.js"
+import { selectPuzzle } from "./interaction.js"
 
 // Track player position and if they're in a puzzle or not
 const playerStats = {
@@ -25,7 +25,7 @@ const playerTurnRight = () => {
     }
     savePosition()
     exploreCameraRefresh()
-    checkInteract()
+    selectPuzzle()
 }
 
 const playerTurnLeft = () => {
@@ -35,7 +35,7 @@ const playerTurnLeft = () => {
     }
     savePosition()
     exploreCameraRefresh()
-    checkInteract()
+    selectPuzzle()
 }
 
 const playerMoveForward = () => {
@@ -53,7 +53,7 @@ const playerMoveForward = () => {
     }
     resetPosition()
     exploreCameraRefresh()
-    checkInteract()
+    selectPuzzle()
 }
 
 // Save position after turning and moving forward (only after checking if out of bounds)
