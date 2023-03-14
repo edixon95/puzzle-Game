@@ -126,3 +126,5 @@ document.getElementById('loadButton').addEventListener("click", loadGame)
 document.getElementById('butOne').addEventListener("click", playerTurnLeft)
 document.getElementById('butTwo').addEventListener("click", playerMoveForward)
 document.getElementById('butThree').addEventListener("click", playerTurnRight)
+
+// Something went wrong?
