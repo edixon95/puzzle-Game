@@ -123,6 +123,16 @@ const startGame = () => {
     document.getElementById('gameScreen').src = "./assets/img/levelOne/x3y1f0.jpg"
 }
 
+// Puzzle interaction stuff. Needs to be done in this file to have access to the objects
+const interactButton = () => {
+    const facingPuzzle = JSON.parse(localStorage.getItem("facingPuzzle"))
+    puzzleStats.currentPuzzle = facingPuzzle
+    playerStats.puzzle = true
+    savePosition()
+    console.log(playerStats)
+    console.log(puzzleStats)
+}
+
 // Select menu Buttons. This entire div is wiped to remove the event listeners once used.
 document.getElementById('startButton').addEventListener("click", startGame)
 document.getElementById('loadButton').addEventListener("click", loadGame)
@@ -130,5 +140,6 @@ document.getElementById('loadButton').addEventListener("click", loadGame)
 document.getElementById('butOne').addEventListener("click", playerTurnLeft)
 document.getElementById('butTwo').addEventListener("click", playerMoveForward)
 document.getElementById('butThree').addEventListener("click", playerTurnRight)
+document.getElementById('butFour').addEventListener("click", interactButton)
 
 // Something went wrong?
