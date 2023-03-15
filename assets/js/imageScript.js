@@ -1,3 +1,7 @@
+// This array contains objects that hold images for each position.
+// First it takes the players X axis, and then follows the path for Y axis
+// Finally, it takes what direction the player is facing (0-3) and provides a file path for that image
+
 const xAxisOne = [
     {
         x: 0,
@@ -135,7 +139,7 @@ const xAxisOne = [
         ],
     },
 ]
-
+// This contains dummy images for the time being
 const lightsArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
@@ -171,37 +175,40 @@ const lightsArray = [
         ]
 ]
 
-// Update camera, log stats
+// Function updated: now responsible for all image loading
 export const exploreCameraRefresh = () => {
+    // Grab localStorge for player and puzzle and select the game screen
     const imageCheck = JSON.parse(localStorage.getItem("playerTrack")) || {}
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     const gameScreen = document.getElementById('gameScreen')
-
+    // If player not in puzzle (false)
     if(imageCheck.puzzle == false) {
+        //Take player x, y and facing to load the corresponding image for player object
         gameScreen.src = xAxisOne[imageCheck.x].y[imageCheck.y][imageCheck.facing]
     console.log(imageCheck)
     console.log(puzzleCheck)
-    }
+    } // if player in puzzle (true)
     else if(imageCheck.puzzle == true){
-        
-        imageMaker(lightsArray[puzzleCheck.currentPuzzle][puzzleCheck.currentPuzzle])
+        // Take puzzle number and sequence (stage) in the puzzle pass the array in to the imageMaker callback function
+        imageMaker(lightsArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq])
     }
 }
-
+// Takes an array [lightsArray] and map all the puzzle elements on to the game screen
 const imageMaker = (array) => {
+    // Select the screenContainer and and define an image element to append later
     const screenContainer = document.getElementById('screenContainer')
     const backgroundImage = document.createElement("img")
-    
+    // lightNumber used to give each image a unique ID to be interacted with
     let lightNumber = 1
-    
+    // Map the images in to the screenContainer
     screenContainer.innerHTML = array.map(image => {
         return`
         <img src="${image}" class="overlay" id="light${lightNumber++}" />`
     }).join(' ')
-
+    // Set the background image for the puzzle
     backgroundImage.src = lightsArray[1][0]
     backgroundImage.classList.add('gameScreen')
-    
+    // Add it to the game screen, since innterHTML just wiped everything.
     screenContainer.appendChild(backgroundImage)
 }
 

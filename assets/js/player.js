@@ -17,7 +17,10 @@ const puzzleStats = {
     puzzleSeq: 0, // Define which sequence in currentPuzzle
 }
 
-// Player movement. 0 = North. 
+// Player movement. 0 = North. 1 = East. 2 = South. 3 = West
+// savePosition - player.js - line 60
+// exploreCameraRefresh - imageScript.js
+// selectPuzzle - interaction.js
 const playerTurnRight = () => {
     playerStats.facing++
     if(playerStats.facing == 4){
@@ -62,6 +65,7 @@ const savePosition = () => {
     localStorage.setItem("puzzleTrack", JSON.stringify(puzzleStats));
 }
 // Check out of bounds, reset the player to previous position if triggered
+// playerStats are the real object, playerPosition is localStorage
 const resetPosition = () => {
     const playerPosition = JSON.parse(localStorage.getItem("playerTrack")) || {}
     if(playerStats.x == 2 && playerStats.y == 1 || playerStats.x == 2 && playerStats.y == 2 || playerStats.x == 2 && playerStats.y == 3){
@@ -95,7 +99,7 @@ const loadGame = () => {
     puzzleStats.currentPuzzle = PuzzleFile.currentPuzzle
     puzzleStats.puzzleComplete = PuzzleFile.puzzleComplete
     puzzleStats.puzzleSeq = PuzzleFile.puzzleSeq
-
+    // Then update the camera, this will also load a puzzle if that was the last state the game was left in
     exploreCameraRefresh()
     document.getElementById('startLoad').classList.add('hidden')
     document.getElementById('navButton').classList.remove('hidden')
@@ -105,6 +109,7 @@ const loadGame = () => {
 
 // Start fresh game
 const startGame = () => {
+    // Force player and puzzle object in to default state
     playerStats.x = 3
     playerStats.y = 1
     playerStats.facing = 0
@@ -114,12 +119,14 @@ const startGame = () => {
     puzzleStats.currentPuzzle = 0
     puzzleStats.puzzleComplete = 0
     puzzleStats.puzzleSeq = 0
-
+    // Then save to overwrite 
     savePosition()
+    // Show movement buttons, clear the event listeners from the menu buttons
     document.getElementById('startLoad').classList.add('hidden')
     document.getElementById('navButton').classList.remove('hidden')
     document.getElementById('navButton').classList.add('navigationButtons')
     document.getElementById('startLoad').innerHTML = ""
+    // This first image is always seen at start game, so it's hard coded just to avoid loading everything for no reason
     document.getElementById('gameScreen').src = "./assets/img/levelOne/x3y1f0.jpg"
 }
 
