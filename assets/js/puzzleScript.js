@@ -9,7 +9,7 @@ export const enablePuzzleButtons = () => {
     }
 }
 
-// The first puzzle
+// Original light object for values to start with, will also reset the puzzle in event of quit
 const lightObject = {
     light1: 0,
     light2: 0,
@@ -18,18 +18,20 @@ const lightObject = {
     light5: 0,
     light6: 0,
 }
-
+// Save lightObject to localStorage
 const saveLightObject = () => {
     localStorage.setItem("lightObject", JSON.stringify(lightObject));
 }
 
 // button functions
-
+// (b)utton 1 (p)uzzle 1 (s)equence 1
 const b1p1s1 = () => {
+    // load lightObject from localStorage
     const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
+    // Select lights for this button
     const light1 = document.getElementById('light1')
     const light3 = document.getElementById('light3')
-
+    // Toggle to turn lights on and off
     if(lightCheck.light1 == 0){
         lightObject.light1 = 1
         light1.classList.remove('hidden')
@@ -47,6 +49,7 @@ const b1p1s1 = () => {
         lightObject.light3 = 0
         light3.classList.add('hidden')
     }
+    // Save after button press, and check if puzzle is completed
     saveLightObject()
     checkPass()
 }
@@ -102,7 +105,7 @@ const b3p1s1 = () => {
     saveLightObject()
     checkPass()
 }
-
+// Clears puzzleButton container and adds required buttons for this puzzle
 const makeButton = () => {
     const buttonContainer = document.getElementById('puzzleButton')
     buttonContainer.innerHTML = `
@@ -110,7 +113,7 @@ const makeButton = () => {
     <button id="puzBut2">Two</button>
     <button id="puzBut3">Three</button>`
 }
-
+// Swap containers around from navigation buttons to puzzle buttons
 const showContainer = () => {
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
@@ -125,7 +128,7 @@ const showContainer = () => {
     navigationContainer.classList.remove('showCurrentButton')
     navigationContainer.classList.add('hidden')
 }
-
+// Check lightObject from localStorage to see if puzzle is complete
 const checkPass = () => {
     const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
     if(lightCheck.light1 == 1 && lightCheck.light2 == 1 && lightCheck.light3 == 1 && lightCheck.light4 == 1 && lightCheck.light5 == 1 && lightCheck.light6 == 1){
