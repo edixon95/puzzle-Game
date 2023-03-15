@@ -23,12 +23,12 @@
     left: 0;
 }
 
-.navigationButtons {
+.showCurrentButton {
     width: 100%;
     display: flex;
 }
 
-#butOne, #butTwo, #butThree, #butFour, #startButton, #loadButton {
+#butOne, #butTwo, #butThree, #butFour, #startButton, #loadButton, #puzBut1, #puzBut2, #puzBut3 {
     width: 10%;
     height: 3rem;
     margin-left: 1rem;

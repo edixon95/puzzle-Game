@@ -1,3 +1,5 @@
+import { enablePuzzleButtons } from "./puzzleScript.js"
+
 // This array contains objects that hold images for each position.
 // First it takes the players X axis, and then follows the path for Y axis
 // Finally, it takes what direction the player is facing (0-3) and provides a file path for that image
@@ -143,14 +145,14 @@ const xAxisOne = [
 const lightsArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
-            [ "./assets/img/menus/menuBackground.jpg" ], //puzzleSeq: 0,
+            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
                 [ //puzzleSeq: 1
-                "./assets/img/Overlays/x1y4f1p2.png", 
-                "./assets/img/Overlays/x1y4f1p3.png", 
-                "./assets/img/Overlays/x1y4f2p1.png", 
-                "./assets/img/Overlays/x1y4f3p1.png", 
-                "./assets/img/Overlays/x1y4f3p2.png", 
-                "./assets/img/Overlays/x1y5f1p3.png", ],
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
                 [ //puzzleSeq: 2
                 "./assets/img/Overlays/x1y4f1p2.png", 
                 "./assets/img/Overlays/x1y4f1p3.png", 
@@ -205,13 +207,14 @@ const imageMaker = (array) => {
     // Map the images in to the screenContainer
     screenContainer.innerHTML = array.map(image => {
         return`
-        <img src="${image}" class="overlay" id="light${lightNumber++}" />`
+        <img src="${image}" class="overlay hidden" id="light${lightNumber++}" />`
     }).join(' ')
     // Set the background image for the puzzle
     backgroundImage.src = lightsArray[puzzleCheck.currentPuzzle][0]
     backgroundImage.classList.add('gameScreen')
     // Add it to the game screen, since innterHTML just wiped everything.
     screenContainer.appendChild(backgroundImage)
+    enablePuzzleButtons()
 }
 
 // Something went wrong?

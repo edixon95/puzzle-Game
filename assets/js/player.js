@@ -103,7 +103,7 @@ const loadGame = () => {
     exploreCameraRefresh()
     document.getElementById('startLoad').classList.add('hidden')
     document.getElementById('navButton').classList.remove('hidden')
-    document.getElementById('navButton').classList.add('navigationButtons')
+    document.getElementById('navButton').classList.add('showCurrentButton')
     document.getElementById('startLoad').innerHTML = ""
 }
 
@@ -124,7 +124,7 @@ const startGame = () => {
     // Show movement buttons, clear the event listeners from the menu buttons
     document.getElementById('startLoad').classList.add('hidden')
     document.getElementById('navButton').classList.remove('hidden')
-    document.getElementById('navButton').classList.add('navigationButtons')
+    document.getElementById('navButton').classList.add('showCurrentButton')
     document.getElementById('startLoad').innerHTML = ""
     // This first image is always seen at start game, so it's hard coded just to avoid loading everything for no reason
     document.getElementById('gameScreen').src = "./assets/img/levelOne/x3y1f0.jpg"
@@ -134,6 +134,7 @@ const startGame = () => {
 const interactButton = () => {
     const facingPuzzle = JSON.parse(localStorage.getItem("facingPuzzle"))
     puzzleStats.currentPuzzle = facingPuzzle
+    puzzleStats.puzzleSeq = 1
     playerStats.puzzle = true
     savePosition()
     exploreCameraRefresh()
