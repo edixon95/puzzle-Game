@@ -129,8 +129,7 @@ const interactButton = () => {
     puzzleStats.currentPuzzle = facingPuzzle
     playerStats.puzzle = true
     savePosition()
-    console.log(playerStats)
-    console.log(puzzleStats)
+    exploreCameraRefresh()
 }
 
 // Select menu Buttons. This entire div is wiped to remove the event listeners once used.

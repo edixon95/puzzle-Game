@@ -6,6 +6,11 @@
     position: relative;
 }
 
+.gameScreen {
+    width: 90%;
+    z-index: 1;
+}
+
 #gameScreen {
     width: 90%;
     z-index: 1;

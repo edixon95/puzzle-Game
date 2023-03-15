@@ -32,7 +32,7 @@ const puzzleLocation = [
     },
 ]
 
-
+// Function to compare player location with puzzle locations to display interact button and begin to update player object
 export const selectPuzzle = () => {
     const playerGet = JSON.parse(localStorage.getItem("playerTrack")) || {} // Get player info
     const playerStats = [playerGet] // Use it as an array to get access to filter

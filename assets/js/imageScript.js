@@ -136,14 +136,74 @@ const xAxisOne = [
     },
 ]
 
+const lightsArray = [
+    [  ], // currentPuzzle: 0
+        [ // currentPuzzle: 1
+            [ "./assets/img/menus/menuBackground.jpg" ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 2
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 3
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 4
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+        ]
+]
+
 // Update camera, log stats
 export const exploreCameraRefresh = () => {
     const imageCheck = JSON.parse(localStorage.getItem("playerTrack")) || {}
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     const gameScreen = document.getElementById('gameScreen')
-    gameScreen.src = xAxisOne[imageCheck.x].y[imageCheck.y][imageCheck.facing]
+
+    if(imageCheck.puzzle == false) {
+        gameScreen.src = xAxisOne[imageCheck.x].y[imageCheck.y][imageCheck.facing]
     console.log(imageCheck)
     console.log(puzzleCheck)
+    }
+    else if(imageCheck.puzzle == true){
+        
+        imageMaker(lightsArray[puzzleCheck.currentPuzzle][puzzleCheck.currentPuzzle])
+    }
+}
+
+const imageMaker = (array) => {
+    const screenContainer = document.getElementById('screenContainer')
+    const backgroundImage = document.createElement("img")
+    
+    let lightNumber = 1
+    
+    screenContainer.innerHTML = array.map(image => {
+        return`
+        <img src="${image}" class="overlay" id="light${lightNumber++}" />`
+    }).join(' ')
+
+    backgroundImage.src = lightsArray[1][0]
+    backgroundImage.classList.add('gameScreen')
+    
+    screenContainer.appendChild(backgroundImage)
 }
 
 // Something went wrong?
+
