@@ -195,6 +195,8 @@ export const exploreCameraRefresh = () => {
 }
 // Takes an array [lightsArray] and map all the puzzle elements on to the game screen
 const imageMaker = (array) => {
+    // Grab puzzle localStorage
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     // Select the screenContainer and and define an image element to append later
     const screenContainer = document.getElementById('screenContainer')
     const backgroundImage = document.createElement("img")
@@ -206,7 +208,7 @@ const imageMaker = (array) => {
         <img src="${image}" class="overlay" id="light${lightNumber++}" />`
     }).join(' ')
     // Set the background image for the puzzle
-    backgroundImage.src = lightsArray[1][0]
+    backgroundImage.src = lightsArray[puzzleCheck.currentPuzzle][0]
     backgroundImage.classList.add('gameScreen')
     // Add it to the game screen, since innterHTML just wiped everything.
     screenContainer.appendChild(backgroundImage)
