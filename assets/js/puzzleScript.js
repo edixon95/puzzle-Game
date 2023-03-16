@@ -1,15 +1,13 @@
-{/* <button id="puzButOne">One</button> */}
-// Brute force method for adding buttons and puzzle logic.
+// 
 export const enablePuzzleButtons = () => {
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     if(puzzleCheck.currentPuzzle == 1 && puzzleCheck.puzzleSeq == 1) {
         makeButton()
         showContainer()
-        saveLightObject()
     }
 }
 
-// Original light object for values to start with, will also reset the puzzle in event of quit
+// base light object. 
 const lightObject = {
     light1: 0,
     light2: 0,
@@ -18,11 +16,33 @@ const lightObject = {
     light5: 0,
     light6: 0,
 }
-// Save lightObject to localStorage
-const saveLightObject = () => {
-    localStorage.setItem("lightObject", JSON.stringify(lightObject));
-}
 
+// Accepts two paremeters (strings) that are equal to the Id of the element you want to control
+// eg lightOptionOne = "light1" lightOptionTwo = "light3"
+const twoLightButton = (lightOptionOne, lightOptionTwo) => {
+    // Select the elements with the parameters
+    let firstSelectClass = document.getElementById(lightOptionOne).classList
+    let secondSelectClass = document.getElementById(lightOptionTwo).classList
+    // Toggle visibility of the element and update the lightObject. 1 = visible. 0 = hidden.
+    if(lightObject[lightOptionOne] == 0){
+        firstSelectClass.remove('hidden')
+        lightObject[lightOptionOne] = 1
+    }
+    else{
+        firstSelectClass.add('hidden')
+        lightObject[lightOptionOne] = 0
+    }
+
+    if(lightObject[lightOptionTwo] == 0){
+        secondSelectClass.remove('hidden')
+        lightObject[lightOptionTwo] = 1
+    }
+    else{
+        secondSelectClass.add('hidden')
+        lightObject[lightOptionTwo] = 0
+    }
+    console.log(lightObject)
+}
 // button functions
 // (b)utton 1 (p)uzzle 1 (s)equence 1
 const b1p1s1 = () => {
@@ -50,33 +70,6 @@ const b1p1s1 = () => {
         light3.classList.add('hidden')
     }
     // Save after button press, and check if puzzle is completed
-    saveLightObject()
-    checkPass()
-}
-
-const b2p1s1 = () => {
-    const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
-    const light2 = document.getElementById('light2')
-    const light6 = document.getElementById('light6')
-
-    if(lightCheck.light2 == 0){
-        lightObject.light2 = 1
-        light2.classList.remove('hidden')
-    }
-    else {
-        lightObject.light2 = 0
-        light2.classList.add('hidden')
-    }
-
-    if(lightCheck.light6 == 0){
-        lightObject.light6 = 1
-        light6.classList.remove('hidden')
-    }
-    else {
-        lightObject.light6 = 0
-        light6.classList.add('hidden')
-    }
-    saveLightObject()
     checkPass()
 }
 
@@ -102,7 +95,6 @@ const b3p1s1 = () => {
         lightObject.light5 = 0
         light5.classList.add('hidden')
     }
-    saveLightObject()
     checkPass()
 }
 // Clears puzzleButton container and adds required buttons for this puzzle
@@ -118,8 +110,12 @@ const showContainer = () => {
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
 
-    document.getElementById('puzBut1').addEventListener("click", b1p1s1)
-    document.getElementById('puzBut2').addEventListener("click", b2p1s1)
+    document.getElementById('puzBut1').addEventListener("click", function(){
+        twoLightButton("light1", "light3")
+    })
+    document.getElementById('puzBut2').addEventListener("click", function(){
+        twoLightButton("light2", "light4")
+    })
     document.getElementById('puzBut3').addEventListener("click", b3p1s1)
 
     buttonContainer.classList.remove('hidden')
