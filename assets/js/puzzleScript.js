@@ -2,9 +2,10 @@
 export const enablePuzzleButtons = () => {
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     const puzzleStats = puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
+    const functionArray = puzzleFunctionArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
     if(puzzleCheck.currentPuzzle == 1 && puzzleCheck.puzzleSeq == 1) {
         makeButton(puzzleStats)
-        showContainer()
+        showContainer(functionArray)
         console.log(puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq])
     }
 }
@@ -17,6 +18,9 @@ const lightObject = {
     light4: 0,
     light5: 0,
     light6: 0,
+    light7: 0,
+    light8: 0,
+    light9: 0,
 }
 
 // Puzzle button array
@@ -58,11 +62,11 @@ const puzzleFunctionArray = [
             [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
                 [ //puzzleSeq: 1
                 "light1",
-                "light6",
-                "light2",
                 "light3",
-                "light4",
-                "light5"],
+                "light2",
+                "light5",
+                "light6",
+                "light4",],
                 [ //puzzleSeq: 2
                 "./assets/img/Overlays/x1y4f1p2.png", 
                 "./assets/img/Overlays/x1y4f1p3.png", 
@@ -113,6 +117,7 @@ const twoLightButton = (lightOptionOne, lightOptionTwo) => {
         lightObject[lightOptionTwo] = 0
     }
     console.log(lightObject)
+    checkPass()
 }
 
 // Clears puzzleButton container and adds required buttons for this puzzle
@@ -125,32 +130,44 @@ const makeButton = (array) => {
     }).join(' ')
 }
 
+const buttonEvent = (array) => {
+    document.getElementById('puzBut1').addEventListener("click", function(){
+        twoLightButton(array[0], array[1])
+    })
+
+    document.getElementById('puzBut2').addEventListener("click", function(){
+        twoLightButton(array[2], array[3])
+    })
+
+    document.getElementById('puzBut3').addEventListener("click", function(){
+        twoLightButton(array[4], array[5])
+    })
+}
+
 // Swap containers around from navigation buttons to puzzle buttons
-const showContainer = () => {
+const showContainer = (array) => {
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
-
-    document.getElementById('puzBut1').addEventListener("click", function(){
-        twoLightButton("light1", "light3")
-    })
-    document.getElementById('puzBut2').addEventListener("click", function(){
-        twoLightButton("light2", "light4")
-    })
-    document.getElementById('puzBut3').addEventListener("click", function(){
-        twoLightButton("light5", "light6")
-    })
-    // document.getElementById('puzBut3').addEventListener("click", b3p1s1)
-
+    buttonEvent(array)
+    
     buttonContainer.classList.remove('hidden')
     buttonContainer.classList.add('showCurrentButton')
-
     navigationContainer.classList.remove('showCurrentButton')
     navigationContainer.classList.add('hidden')
 }
-// Check lightObject from localStorage to see if puzzle is complete
+
+
+// Check lightObject and compare against puzzleTarget
 const checkPass = () => {
-    const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
-    if(lightCheck.light1 == 1 && lightCheck.light2 == 1 && lightCheck.light3 == 1 && lightCheck.light4 == 1 && lightCheck.light5 == 1 && lightCheck.light6 == 1){
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
+    const functionArray = puzzleFunctionArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
+    const findTarget = Object.values(lightObject)
+    const setTarget = findTarget.reduce((acc, val) => {
+        return acc + val
+    }, 0)
+    console.log(setTarget)
+    
+    if(setTarget == functionArray.length){
         const screenContainer = document.getElementById('screenContainer')
         screenContainer.innerHTML = `<h1>You're a genius</h1>`
     }
