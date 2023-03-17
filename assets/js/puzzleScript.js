@@ -1,9 +1,11 @@
 // 
 export const enablePuzzleButtons = () => {
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
+    const puzzleStats = puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
     if(puzzleCheck.currentPuzzle == 1 && puzzleCheck.puzzleSeq == 1) {
-        makeButton()
+        makeButton(puzzleStats)
         showContainer()
+        console.log(puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq])
     }
 }
 
@@ -16,6 +18,75 @@ const lightObject = {
     light5: 0,
     light6: 0,
 }
+
+// Puzzle button array
+const puzzleButtonArray = [
+    [  ], // currentPuzzle: 0
+        [ // currentPuzzle: 1
+            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "One",
+                "Two",
+                "Three",],
+                [ //puzzleSeq: 2
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 3
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 4
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+        ]
+]
+
+const puzzleFunctionArray = [
+    [  ], // currentPuzzle: 0
+        [ // currentPuzzle: 1
+            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "light1",
+                "light6",
+                "light2",
+                "light3",
+                "light4",
+                "light5"],
+                [ //puzzleSeq: 2
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 3
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+                [ //puzzleSeq: 4
+                "./assets/img/Overlays/x1y4f1p2.png", 
+                "./assets/img/Overlays/x1y4f1p3.png", 
+                "./assets/img/Overlays/x1y4f2p1.png", 
+                "./assets/img/Overlays/x1y4f3p1.png", 
+                "./assets/img/Overlays/x1y4f3p2.png", 
+                "./assets/img/Overlays/x1y5f1p3.png", ],
+        ]
+]
+
 
 // Accepts two paremeters (strings) that are equal to the Id of the element you want to control
 // eg lightOptionOne = "light1" lightOptionTwo = "light3"
@@ -43,68 +114,17 @@ const twoLightButton = (lightOptionOne, lightOptionTwo) => {
     }
     console.log(lightObject)
 }
-// button functions
-// (b)utton 1 (p)uzzle 1 (s)equence 1
-const b1p1s1 = () => {
-    // load lightObject from localStorage
-    const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
-    // Select lights for this button
-    const light1 = document.getElementById('light1')
-    const light3 = document.getElementById('light3')
-    // Toggle to turn lights on and off
-    if(lightCheck.light1 == 0){
-        lightObject.light1 = 1
-        light1.classList.remove('hidden')
-    }
-    else {
-        lightObject.light1 = 0
-        light1.classList.add('hidden')
-    }
 
-    if(lightCheck.light3 == 0){
-        lightObject.light3 = 1
-        light3.classList.remove('hidden')
-    }
-    else {
-        lightObject.light3 = 0
-        light3.classList.add('hidden')
-    }
-    // Save after button press, and check if puzzle is completed
-    checkPass()
-}
-
-const b3p1s1 = () => {
-    const lightCheck = JSON.parse(localStorage.getItem("lightObject")) || {}
-    const light4 = document.getElementById('light4')
-    const light5 = document.getElementById('light5')
-
-    if(lightCheck.light4 == 0){
-        lightObject.light4 = 1
-        light4.classList.remove('hidden')
-    }
-    else {
-        lightObject.light4 = 0
-        light4.classList.add('hidden')
-    }
-
-    if(lightCheck.light5 == 0){
-        lightObject.light5 = 1
-        light5.classList.remove('hidden')
-    }
-    else {
-        lightObject.light5 = 0
-        light5.classList.add('hidden')
-    }
-    checkPass()
-}
 // Clears puzzleButton container and adds required buttons for this puzzle
-const makeButton = () => {
+const makeButton = (array) => {
+    let buttonid = 1
     const buttonContainer = document.getElementById('puzzleButton')
-    buttonContainer.innerHTML = `
-    <button id="puzBut1">One</button>
-    <button id="puzBut2">Two</button>
-    <button id="puzBut3">Three</button>`
+    buttonContainer.innerHTML = array.map(button => {
+        return`
+        <button id="puzBut${buttonid++}">${button}</button>`
+    }).join(' ')
 }
+
 // Swap containers around from navigation buttons to puzzle buttons
 const showContainer = () => {
     const buttonContainer = document.getElementById('puzzleButton')
@@ -116,7 +136,10 @@ const showContainer = () => {
     document.getElementById('puzBut2').addEventListener("click", function(){
         twoLightButton("light2", "light4")
     })
-    document.getElementById('puzBut3').addEventListener("click", b3p1s1)
+    document.getElementById('puzBut3').addEventListener("click", function(){
+        twoLightButton("light5", "light6")
+    })
+    // document.getElementById('puzBut3').addEventListener("click", b3p1s1)
 
     buttonContainer.classList.remove('hidden')
     buttonContainer.classList.add('showCurrentButton')
