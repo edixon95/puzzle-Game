@@ -35,3 +35,10 @@ button {
     margin-right: 1rem;
 }
 
+.backButton {
+    width: 10%;
+    height: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+

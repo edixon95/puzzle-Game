@@ -1,6 +1,7 @@
 // Import stuff
 import { exploreCameraRefresh } from "./imageScript.js"
 import { selectPuzzle } from "./interaction.js"
+import { lightObjectReset } from "./puzzleScript.js"
 
 // Track player position and if they're in a puzzle or not
 const playerStats = {
@@ -133,11 +134,72 @@ const startGame = () => {
 // Puzzle interaction stuff. Needs to be done in this file to have access to the objects
 const interactButton = () => {
     const facingPuzzle = JSON.parse(localStorage.getItem("facingPuzzle"))
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
+    const gameScreen = document.getElementById('gameScreen') // Not used yet, but will be used to say that you can't attempt puzzle yet
+    // This is so I stop breaking things
+    // if puzzles complete is equal to or greater than the puzzle being faced(-1), run
+    // Puzzles complete starts at 0. Player will always have one less puzzle complete than next puzzle to be done.
+    // This check MUST happen here. There's too many errors to count if you try to do it after
+    // Though there is a lot of data missing, that's probably more likely the cause
+    if(puzzleCheck.puzzleComplete >= facingPuzzle-1){
     puzzleStats.currentPuzzle = facingPuzzle
     puzzleStats.puzzleSeq = 1
     playerStats.puzzle = true
     savePosition()
     exploreCameraRefresh()
+    }
+    else{
+        console.log("Stop breaking")
+        // To do: add in function and image structure to show in this event
+    }
+}
+
+
+
+// Puzzle object changing for puzzleScript. It's just easier to update things here.
+export const puzzleSeqUpdate = () => {
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
+    // When puzzle requirements met, increment puzzleSequence, then save and update images
+    puzzleStats.puzzleSeq +=1
+    if(puzzleStats.puzzleSeq == 5){
+        puzzleStats.puzzleSeq = 0
+        // Set puzzle complete to be current puzzle
+        // The downside of this is it's possible to undo progress by completing an earlier puzzle
+        // Definitely needs fixing in the future
+        puzzleStats.puzzleComplete = puzzleCheck.currentPuzzle
+        playerStats.puzzle = false
+        // Then reset everything
+        backButtonFunction()
+    } // else, save and update the camera
+    savePosition()
+    exploreCameraRefresh()
+}
+// Same reason as above, it's just easier to do it in this file
+// This function is also hijacked for ending a puzzle once it's finished as it is close to default starting positions.
+export const backButtonFunction = () => {
+    playerStats.puzzle = false
+    puzzleStats.currentPuzzle = 0
+    puzzleStats.puzzleSeq = 0
+    lightObjectReset()
+    // Wipe screenContainer, this could contain multiple images overlayed that need to be removed
+    const screenContainer = document.getElementById('screenContainer')
+    screenContainer.innerHTML = ""
+    // Create a new game screen and add it
+    const backgroundImage = document.createElement("img")
+    backgroundImage.setAttribute("id", "gameScreen")
+    screenContainer.appendChild(backgroundImage)
+    // Update local storage, then update the camera
+    savePosition()
+    exploreCameraRefresh()
+
+    const buttonContainer = document.getElementById('puzzleButton')
+    const navigationContainer = document.getElementById('navButton')
+    // Swap the button containers
+    buttonContainer.classList.add('hidden')
+    buttonContainer.classList.remove('showCurrentButton')
+    navigationContainer.classList.add('showCurrentButton')
+    navigationContainer.classList.remove('hidden')
+
 }
 
 // Select menu Buttons. This entire div is wiped to remove the event listeners once used.

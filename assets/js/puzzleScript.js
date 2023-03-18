@@ -1,13 +1,14 @@
-// 
+// Importing puzzle updating function to use the object in player.js and camera update
+import { exploreCameraRefresh } from "./imageScript.js"
+import { backButtonFunction, puzzleSeqUpdate } from "./player.js"
+
 export const enablePuzzleButtons = () => {
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     const puzzleStats = puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
     const functionArray = puzzleFunctionArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
-    if(puzzleCheck.currentPuzzle == 1 && puzzleCheck.puzzleSeq == 1) {
-        makeButton(puzzleStats)
-        showContainer(functionArray)
-        console.log(puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq])
-    }
+    
+    makeButton(puzzleStats) // line 194
+    addButtonFunction(functionArray) // line 229
 }
 
 // base light object. 
@@ -23,7 +24,21 @@ const lightObject = {
     light9: 0,
 }
 
+// Solves world hunger
+export const lightObjectReset = () => {
+    lightObject.light1 = 0
+    lightObject.light2 = 0
+    lightObject.light3 = 0
+    lightObject.light4 = 0
+    lightObject.light5 = 0
+    lightObject.light6 = 0
+    lightObject.light7 = 0
+    lightObject.light8 = 0
+    lightObject.light9 = 0
+}
+
 // Puzzle button array
+// ** Holding mostly dummy data
 const puzzleButtonArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
@@ -33,12 +48,28 @@ const puzzleButtonArray = [
                 "Two",
                 "Three",],
                 [ //puzzleSeq: 2
-                "./assets/img/Overlays/x1y4f1p2.png", 
-                "./assets/img/Overlays/x1y4f1p3.png", 
-                "./assets/img/Overlays/x1y4f2p1.png", 
-                "./assets/img/Overlays/x1y4f3p1.png", 
-                "./assets/img/Overlays/x1y4f3p2.png", 
-                "./assets/img/Overlays/x1y5f1p3.png", ],
+                "One", 
+                "Two", 
+                "Three", ],
+                [ //puzzleSeq: 3
+                "One", 
+                "Two", 
+                "Three", ],
+                [ //puzzleSeq: 4
+                "One", 
+                "Two", 
+                "Three", ],
+        ],
+        [ // currentPuzzle: 2
+            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "One",
+                "Two",
+                "Three",],
+                [ //puzzleSeq: 2
+                "One", 
+                "Two", 
+                "Three", ],
                 [ //puzzleSeq: 3
                 "./assets/img/Overlays/x1y4f1p2.png", 
                 "./assets/img/Overlays/x1y4f1p3.png", 
@@ -55,11 +86,43 @@ const puzzleButtonArray = [
                 "./assets/img/Overlays/x1y5f1p3.png", ],
         ]
 ]
-
+// ** Holding mostly dummy data
+// This array is used to select the id's of the light elements in each puzzle
 const puzzleFunctionArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
-            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+            [  ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "light1",
+                "light3",
+                "light2",
+                "light5",
+                "light6",
+                "light4", ],
+                [ //puzzleSeq: 2
+                "light5", 
+                "light2", 
+                "light1", 
+                "light6", 
+                "light3", 
+                "light4", ],
+                [ //puzzleSeq: 3
+                "light5",
+                "light3",
+                "light2",
+                "light1",
+                "light4",
+                "light6", ],
+                [ //puzzleSeq: 4
+                "light1",
+                "light3",
+                "light2",
+                "light5",
+                "light6",
+                "light4", ],
+        ],
+        [ // currentPuzzle: 2
+            [  ], //puzzleSeq: 0,
                 [ //puzzleSeq: 1
                 "light1",
                 "light3",
@@ -68,12 +131,12 @@ const puzzleFunctionArray = [
                 "light6",
                 "light4",],
                 [ //puzzleSeq: 2
-                "./assets/img/Overlays/x1y4f1p2.png", 
-                "./assets/img/Overlays/x1y4f1p3.png", 
-                "./assets/img/Overlays/x1y4f2p1.png", 
-                "./assets/img/Overlays/x1y4f3p1.png", 
-                "./assets/img/Overlays/x1y4f3p2.png", 
-                "./assets/img/Overlays/x1y5f1p3.png", ],
+                "light5", 
+                "light2", 
+                "light1", 
+                "light6", 
+                "light3", 
+                "light4", ],
                 [ //puzzleSeq: 3
                 "./assets/img/Overlays/x1y4f1p2.png", 
                 "./assets/img/Overlays/x1y4f1p3.png", 
@@ -90,7 +153,6 @@ const puzzleFunctionArray = [
                 "./assets/img/Overlays/x1y5f1p3.png", ],
         ]
 ]
-
 
 // Accepts two paremeters (strings) that are equal to the Id of the element you want to control
 // eg lightOptionOne = "light1" lightOptionTwo = "light3"
@@ -128,6 +190,12 @@ const makeButton = (array) => {
         return`
         <button id="puzBut${buttonid++}">${button}</button>`
     }).join(' ')
+    // Adds a back button, function is done in player.js
+    const backButton = document.createElement("button")
+    backButton.textContent = "Back"
+    backButton.setAttribute("id", "backButton")
+    buttonContainer.appendChild(backButton)
+    document.getElementById('backButton').addEventListener("click", backButtonFunction)
 }
 
 const buttonEvent = (array) => {
@@ -145,11 +213,11 @@ const buttonEvent = (array) => {
 }
 
 // Swap containers around from navigation buttons to puzzle buttons
-const showContainer = (array) => {
+const addButtonFunction = (array) => {
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
+    // Take from array puzzleFunctionButton and assign img id to buttons
     buttonEvent(array)
-    
     buttonContainer.classList.remove('hidden')
     buttonContainer.classList.add('showCurrentButton')
     navigationContainer.classList.remove('showCurrentButton')
@@ -166,13 +234,11 @@ const checkPass = () => {
         return acc + val
     }, 0)
     console.log(setTarget)
-    
+    // If setTarget (amount of lights on/1) == amount of lights that exist in the puzzle
     if(setTarget == functionArray.length){
-        const screenContainer = document.getElementById('screenContainer')
-        screenContainer.innerHTML = `<h1>You're a genius</h1>`
-    }
-    else {
-
+        lightObjectReset()
+        puzzleSeqUpdate()
+        exploreCameraRefresh()
     }
 }
 

@@ -145,7 +145,48 @@ const xAxisOne = [
 const lightsArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
-            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+            [ 
+                "ignore",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+                [ //puzzleSeq: 1
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
+                [ //puzzleSeq: 2
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
+                [ //puzzleSeq: 3
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
+                [ //puzzleSeq: 4
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
+        ],
+        [ // Current Puzzle 2
+            [ 
+                "ignore",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
                 [ //puzzleSeq: 1
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
@@ -210,12 +251,12 @@ const imageMaker = (array) => {
         <img src="${image}" class="overlay hidden" id="light${lightNumber++}" />`
     }).join(' ')
     // Set the background image for the puzzle
-    backgroundImage.src = lightsArray[puzzleCheck.currentPuzzle][0]
-    backgroundImage.classList.add('gameScreen')
+    // Background image for each puzzle is stored in the 0 index of puzzleSeq
+    backgroundImage.src = lightsArray[puzzleCheck.currentPuzzle][0][puzzleCheck.puzzleSeq]
+    backgroundImage.setAttribute("id", "gameScreen")
     // Add it to the game screen, since innterHTML just wiped everything.
     screenContainer.appendChild(backgroundImage)
     enablePuzzleButtons()
 }
 
 // Something went wrong?
-
