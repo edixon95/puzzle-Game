@@ -161,12 +161,14 @@ export const puzzleSeqUpdate = () => {
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     // When puzzle requirements met, increment puzzleSequence, then save and update images
     puzzleStats.puzzleSeq +=1
+    // if puzzleSeq = 5, reset puzzleSeq
     if(puzzleStats.puzzleSeq == 5){
         puzzleStats.puzzleSeq = 0
         // Set puzzle complete to be current puzzle
         // The downside of this is it's possible to undo progress by completing an earlier puzzle
         // Definitely needs fixing in the future
         puzzleStats.puzzleComplete = puzzleCheck.currentPuzzle
+        // Mark the player as not in a puzzle
         playerStats.puzzle = false
         // Then reset everything
         backButtonFunction()
