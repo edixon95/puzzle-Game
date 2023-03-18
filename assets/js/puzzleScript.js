@@ -309,6 +309,8 @@ const addButtonFunction = (array) => {
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
     // Take from array puzzleFunctionButton and assign img id to buttons
+    // Checks amount of buttons in the puzzle against amount of lights to assign a passable combination of buttons with some variation between puzzles
+    // There is no science behind this, I'm just experimenting
     if(puzzleStats.length == 3 && functionArray.length == 6){
         buttonEvent3b6l(array)
     }
