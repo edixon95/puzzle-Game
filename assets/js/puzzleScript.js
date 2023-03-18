@@ -42,7 +42,7 @@ export const lightObjectReset = () => {
 const puzzleButtonArray = [
     [  ], // currentPuzzle: 0
         [ // currentPuzzle: 1
-            [ "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+            [ "./assets/img/Puzzles/levelOne/puzzleOne/puzzle1p1.png" ], //puzzleSeq: 0,
                 [ //puzzleSeq: 1
                 "One",
                 "Two",
@@ -71,12 +71,9 @@ const puzzleButtonArray = [
                 "Two", 
                 "Three", ],
                 [ //puzzleSeq: 3
-                "./assets/img/Overlays/x1y4f1p2.png", 
-                "./assets/img/Overlays/x1y4f1p3.png", 
-                "./assets/img/Overlays/x1y4f2p1.png", 
-                "./assets/img/Overlays/x1y4f3p1.png", 
-                "./assets/img/Overlays/x1y4f3p2.png", 
-                "./assets/img/Overlays/x1y5f1p3.png", ],
+                "One", 
+                "Two", 
+                "Three" ],
                 [ //puzzleSeq: 4
                 "./assets/img/Overlays/x1y4f1p2.png", 
                 "./assets/img/Overlays/x1y4f1p3.png", 
@@ -108,6 +105,7 @@ const puzzleFunctionArray = [
                 "light4",
                 "light1" ],
                 [ //puzzleSeq: 3
+                "light7",
                 "light5",
                 "light3",
                 "light2",
@@ -326,8 +324,10 @@ const addButtonFunction = (array) => {
 
 // Check lightObject and compare against puzzleTarget
 const checkPass = () => {
+    const overlay = document.getElementById('overlay')
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
     const functionArray = puzzleFunctionArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
+    const buttonArray = puzzleButtonArray[puzzleCheck.currentPuzzle][0]
     const findTarget = Object.values(lightObject)
     const setTarget = findTarget.reduce((acc, val) => {
         return acc + val
@@ -335,11 +335,15 @@ const checkPass = () => {
     console.log(setTarget)
     // If setTarget (amount of lights on/1) == amount of lights that exist in the puzzle
     if(setTarget == functionArray.length){
+        // If puzzle seq = 4 and this triggers the puzzle is over
+        if(puzzleCheck.puzzleSeq == 4){
+            overlay.src = buttonArray
+        }
         setTimeout(function() {
         lightObjectReset()
         puzzleSeqUpdate()
         exploreCameraRefresh()
-        }, 500)
+        }, 1000)
     }
 }
 

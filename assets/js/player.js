@@ -191,6 +191,11 @@ export const backButtonFunction = () => {
     const backgroundImage = document.createElement("img")
     backgroundImage.setAttribute("id", "gameScreen")
     screenContainer.appendChild(backgroundImage)
+    // Creates new overlay element, as it's wiped when a puzzle is made
+    const addedOverlay = document.createElement("img")
+    addedOverlay.src = ""
+    addedOverlay.setAttribute("id", "overlay")
+    screenContainer.appendChild(addedOverlay)
     // Update local storage, then update the camera
     savePosition()
     exploreCameraRefresh()
