@@ -164,10 +164,11 @@ export const puzzleSeqUpdate = () => {
     // if puzzleSeq = 5, reset puzzleSeq
     if(puzzleStats.puzzleSeq == 5){
         puzzleStats.puzzleSeq = 0
-        // Set puzzle complete to be current puzzle
-        // The downside of this is it's possible to undo progress by completing an earlier puzzle
-        // Definitely needs fixing in the future
-        puzzleStats.puzzleComplete = puzzleCheck.currentPuzzle
+        if(puzzleStats.puzzleComplete < puzzleCheck.currentPuzzle ){
+            // Set puzzle complete to be current puzzle, if current puzzle is less than what's been completed
+            // This should fix being able to undo progress by returning to a previous puzzle
+            puzzleStats.puzzleComplete = puzzleCheck.currentPuzzle
+        }
         // Mark the player as not in a puzzle
         playerStats.puzzle = false
         // Then reset everything
