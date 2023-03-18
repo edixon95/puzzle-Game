@@ -102,10 +102,11 @@ const puzzleFunctionArray = [
                 [ //puzzleSeq: 2
                 "light5", 
                 "light2", 
-                "light1", 
                 "light6", 
+                "light7", 
                 "light3", 
-                "light4", ],
+                "light4",
+                "light1" ],
                 [ //puzzleSeq: 3
                 "light5",
                 "light3",
@@ -156,7 +157,7 @@ const puzzleFunctionArray = [
 
 // Accepts two paremeters (strings) that are equal to the Id of the element you want to control
 // eg lightOptionOne = "light1" lightOptionTwo = "light3"
-const twoLightButton = (lightOptionOne, lightOptionTwo) => {
+const twoLightButtonToggle = (lightOptionOne, lightOptionTwo) => {
     // Select the elements with the parameters
     let firstSelectClass = document.getElementById(lightOptionOne).classList
     let secondSelectClass = document.getElementById(lightOptionTwo).classList
@@ -182,6 +183,42 @@ const twoLightButton = (lightOptionOne, lightOptionTwo) => {
     checkPass()
 }
 
+const threeLightButtonToggle = (lightOptionOne, lightOptionTwo, lightOptionThree) => {
+    // Select the elements with the parameters
+    let firstSelectClass = document.getElementById(lightOptionOne).classList
+    let secondSelectClass = document.getElementById(lightOptionTwo).classList
+    let thirdSelectClass = document.getElementById(lightOptionThree).classList
+    // Toggle visibility of the element and update the lightObject. 1 = visible. 0 = hidden.
+    if(lightObject[lightOptionOne] == 0){
+        firstSelectClass.remove('hidden')
+        lightObject[lightOptionOne] = 1
+    }
+    else{
+        firstSelectClass.add('hidden')
+        lightObject[lightOptionOne] = 0
+    }
+
+    if(lightObject[lightOptionTwo] == 0){
+        secondSelectClass.remove('hidden')
+        lightObject[lightOptionTwo] = 1
+    }
+    else{
+        secondSelectClass.add('hidden')
+        lightObject[lightOptionTwo] = 0
+    }
+
+    if(lightObject[lightOptionThree] == 0){
+        thirdSelectClass.remove('hidden')
+        lightObject[lightOptionThree] = 1
+    }
+    else{
+        thirdSelectClass.add('hidden')
+        lightObject[lightOptionThree] = 0
+    }
+    console.log(lightObject)
+    checkPass()
+}
+
 // Clears puzzleButton container and adds required buttons for this puzzle
 const makeButton = (array) => {
     let buttonid = 1
@@ -197,27 +234,87 @@ const makeButton = (array) => {
     buttonContainer.appendChild(backButton)
     document.getElementById('backButton').addEventListener("click", backButtonFunction)
 }
-
-const buttonEvent = (array) => {
+// ButtonEvent 3(b)utton 6(l)ights
+const buttonEvent3b6l = (array) => {
     document.getElementById('puzBut1').addEventListener("click", function(){
-        twoLightButton(array[0], array[1])
+        twoLightButtonToggle(array[0], array[1])
     })
 
     document.getElementById('puzBut2').addEventListener("click", function(){
-        twoLightButton(array[2], array[3])
+        twoLightButtonToggle(array[2], array[3])
     })
 
     document.getElementById('puzBut3').addEventListener("click", function(){
-        twoLightButton(array[4], array[5])
+        twoLightButtonToggle(array[4], array[5])
     })
 }
+// Not used yet, these are just variations of button layouts
+const buttonEvent3b7l = (array) => {
+    document.getElementById('puzBut1').addEventListener("click", function(){
+        threeLightButtonToggle(array[0], array[1], array[2])
+    })
+
+    document.getElementById('puzBut2').addEventListener("click", function(){
+        twoLightButtonToggle(array[3], array[4])
+    })
+
+    document.getElementById('puzBut3').addEventListener("click", function(){
+        twoLightButtonToggle(array[5], array[6])
+    })
+    // lightToggle(array)
+}
+
+const buttonEvent3b7lOverlap = (array) => {
+    document.getElementById('puzBut1').addEventListener("click", function(){
+        threeLightButtonToggle(array[0], array[1], array[2])
+    })
+
+    document.getElementById('puzBut2').addEventListener("click", function(){
+        threeLightButtonToggle(array[0], array[3], array[6])
+    })
+
+    document.getElementById('puzBut3').addEventListener("click", function(){
+        twoLightButtonToggle(array[4], array[5])
+    })
+    lightToggle(array)
+}
+
+// Light Toggler
+// Trying to work out a set of rules to follow that this will function for any puzzle
+// Will update if work out more, but currently it doesn't seem to matter where the toggle takes place
+// As long as the elements toggled are linked to the same button (theory: and the overlap happens in that same spot)
+const lightToggle = (array) => {
+    let firstLight = array[3]
+    let secondLight = array[6]
+
+    let firstSelectClass = document.getElementById(firstLight).classList
+    let secondSelectClass = document.getElementById(secondLight).classList
+
+    lightObject[firstLight] = 1
+    lightObject[secondLight] = 1
+
+    firstSelectClass.remove('hidden')
+    secondSelectClass.remove('hidden')
+}
+
+
 
 // Swap containers around from navigation buttons to puzzle buttons
 const addButtonFunction = (array) => {
+    // Grab puzzle data from localStorage and use the puzzle information to work out how to assign the buttons
+    const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
+    const puzzleStats = puzzleButtonArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
+    const functionArray = puzzleFunctionArray[puzzleCheck.currentPuzzle][puzzleCheck.puzzleSeq]
+    // Select button Containers
     const buttonContainer = document.getElementById('puzzleButton')
     const navigationContainer = document.getElementById('navButton')
     // Take from array puzzleFunctionButton and assign img id to buttons
-    buttonEvent(array)
+    if(puzzleStats.length == 3 && functionArray.length == 6){
+        buttonEvent3b6l(array)
+    }
+    else if(puzzleStats.length == 3 && functionArray.length == 7){
+        buttonEvent3b7lOverlap(array)
+    }
     buttonContainer.classList.remove('hidden')
     buttonContainer.classList.add('showCurrentButton')
     navigationContainer.classList.remove('showCurrentButton')
@@ -236,9 +333,11 @@ const checkPass = () => {
     console.log(setTarget)
     // If setTarget (amount of lights on/1) == amount of lights that exist in the puzzle
     if(setTarget == functionArray.length){
+        setTimeout(function() {
         lightObjectReset()
         puzzleSeqUpdate()
         exploreCameraRefresh()
+        }, 500)
     }
 }
 

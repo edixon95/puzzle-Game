@@ -148,9 +148,9 @@ const lightsArray = [
             [ 
                 "ignore",
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], //puzzleSeq: 0,
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2bg.jpg",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg",   // Puzzle backgrounds stored in 0 index of sequence
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1bg.jpg" ], // puzzleSeq: 0,
                 [ //puzzleSeq: 1
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
@@ -159,12 +159,13 @@ const lightsArray = [
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
                 [ //puzzleSeq: 2
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq3.png", 
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq4.png", 
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq5.png", 
-                "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq6.png", ],
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq1.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq2.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq3.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq4.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq5.png", 
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq6.png",
+                "./assets/img/Puzzles/levelOne/puzzleOne/p1s2sq7.png" ],
                 [ //puzzleSeq: 3
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq1.png", 
                 "./assets/img/Puzzles/levelOne/puzzleOne/p1s1sq2.png", 
