@@ -4,7 +4,7 @@
 ## Secondary goal(s):
 - No frameworks or libraries
 - Use data structures to build everything seen 
-- All purpose functions that work with the addition of new content
+- Modular functions that work with the addition of new content
 ---
 # File overview:
 player.js
