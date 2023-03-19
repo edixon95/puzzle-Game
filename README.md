@@ -9,6 +9,7 @@
 # File overview:
 player.js
 - Responsible for updating the player object and saving to localStorage(LS)<br />
+<br />
 
 imageScript.js
 - Responsible for updating visuals using the objects from **player.js** and LS
