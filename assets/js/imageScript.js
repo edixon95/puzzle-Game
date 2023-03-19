@@ -174,14 +174,14 @@ const overlayArray = [
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
-                1: [ "", "", "./assets/img/Overlays/levelOne/x1y4f1p2.png", "./assets/img/Overlays/levelOne/x1y4f1p3.png", "", "", ],
-                2: [ "", "./assets/img/Overlays/levelOne/x1y4f2p1.png", "", "", "", ""], // x1 y4
-                3: [ "", "./assets/img/Overlays/levelOne/x1y4f3p1.png", "./assets/img/Overlays/levelOne/x1y4f3p2.png", "", "", "", ]
+                1: [ "", "", "./assets/img/Overlays/levelOne/x1y4f1p2.png", "./assets/img/Overlays/levelOne/x1y4f1p3.png", "./assets/img/Overlays/levelOne/x1y4f1p3.png", "", ],
+                2: [ "", "./assets/img/Overlays/levelOne/x1y4f2p1.png", "./assets/img/Overlays/levelOne/x1y4f2p2.png", "./assets/img/Overlays/levelOne/x1y4f2p3.png", "./assets/img/Overlays/levelOne/x1y4f2p4.png", ""], // x1 y4
+                3: [ "", "./assets/img/Overlays/levelOne/x1y4f3p1.png", "./assets/img/Overlays/levelOne/x1y4f3p2.png", "./assets/img/Overlays/levelOne/x1y4f3p3.png", "./assets/img/Overlays/levelOne/x1y4f3p3.png", "", ]
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
                 1: ["", "", "", "./assets/img/Overlays/levelOne/x1y5f1p3.png", "", "", "", ], 
-                2: ["", "./assets/img/Overlays/levelOne/x1y5f2p1.png", "./assets/img/Overlays/levelOne/x1y5f2p2.png", "./assets/img/Overlays/levelOne/x1y5f2p3.png","", "", "", ], //x1 y5
+                2: ["", "./assets/img/Overlays/levelOne/x1y5f2p1.png", "./assets/img/Overlays/levelOne/x1y5f2p2.png", "./assets/img/Overlays/levelOne/x1y5f2p3.png","./assets/img/Overlays/levelOne/x1y5f2p4.png", "", "", ], //x1 y5
                 3: [ "", "", "", "", "", "", "", "",  ],
             },
             {
@@ -218,15 +218,15 @@ const overlayArray = [
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
-                1: [ "", "", "", "./assets/img/Overlays/levelOne/x2y4f1p3.png", "", "", "", "",  ],
-                2: [ "", "", "./assets/img/Overlays/levelOne/x2y4f2p2.png", "./assets/img/Overlays/levelOne/x2y4f2p3.png", "", "", "", "",  ], // x2 y4
-                3: [ "", "./assets/img/Overlays/levelOne/x2y4f3p1.png", "./assets/img/Overlays/levelOne/x2y4f3p2.png", "", "", "", "", "",  ],
+                1: [ "", "", "", "./assets/img/Overlays/levelOne/x2y4f1p3.png", "./assets/img/Overlays/levelOne/x2y4f1p3.png", "", "", "",  ],
+                2: [ "", "", "./assets/img/Overlays/levelOne/x2y4f2p2.png", "./assets/img/Overlays/levelOne/x2y4f2p3.png", "./assets/img/Overlays/levelOne/x2y4f2p4.png", "", "", "",  ], // x2 y4
+                3: [ "", "./assets/img/Overlays/levelOne/x2y4f3p1.png", "./assets/img/Overlays/levelOne/x2y4f3p2.png", "./assets/img/Overlays/levelOne/x2y4f3p3.png", "./assets/img/Overlays/levelOne/x2y4f3p4.png", "", "", "",  ],
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
                 1: [ "", "", "", "", "", "", "", "",  ], 
                 2: [ "", "./assets/img/Overlays/levelOne/x2y5f2p1.png", "./assets/img/Overlays/levelOne/x2y5f2p2.png", "./assets/img/Overlays/levelOne/x2y5f2p3.png", "./assets/img/Overlays/levelOne/x2y5f2p4.png", "", "", "",  ], //x2 y5
-                3: [ "", "./assets/img/Overlays/levelOne/x2y5f3p1.png", "./assets/img/Overlays/levelOne/x2y5f3p2.png", "", "", "", "", "",  ],
+                3: [ "", "./assets/img/Overlays/levelOne/x2y5f3p1.png", "./assets/img/Overlays/levelOne/x2y5f3p2.png", "", "./assets/img/Overlays/levelOne/x2y5f3p4.png", "", "", "",  ],
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
@@ -255,7 +255,7 @@ const overlayArray = [
                 3: [ "", "", "", "", "", "", "", "",  ],
             },
             {
-                0: [ "", "", "", "./assets/img/Overlays/levelOne/x3y3f0p3.png", "", "", "", "",  ],
+                0: [ "", "", "", "./assets/img/Overlays/levelOne/x3y3f0p3.png", "./assets/img/Overlays/levelOne/x3y3f0p4.png", "", "", "",  ],
                 1: [ "", "", "", "", "", "", "", "",  ], 
                 2: [ "", "", "", "", "./assets/img/Overlays/levelOne/x3y3f2p4.png", "", "", "",  ], // x3 y3
                 3: [ "", "", "", "./assets/img/Overlays/levelOne/x3y3f3p3.png", "./assets/img/Overlays/levelOne/x3y3f3p4.png", "", "", "",  ],
@@ -264,19 +264,19 @@ const overlayArray = [
                 0: [ "", "", "", "", "", "", "", "",  ],
                 1: [ "", "", "", "", "", "", "", "",  ],
                 2: [ "", "", "", "./assets/img/Overlays/levelOne/x3y4f2p3.png", "./assets/img/Overlays/levelOne/x3y4f2p4.png", "", "", "",  ], // x3 y4
-                3: [ "", "./assets/img/Overlays/levelOne/x3y4f3p1.png", "./assets/img/Overlays/levelOne/x3y4f3p2.png", "./assets/img/Overlays/levelOne/x3y4f3p3.png", "", "", "", "",  ],
+                3: [ "", "./assets/img/Overlays/levelOne/x3y4f3p1.png", "./assets/img/Overlays/levelOne/x3y4f3p2.png", "./assets/img/Overlays/levelOne/x3y4f3p3.png", "./assets/img/Overlays/levelOne/x3y4f3p4.png", "", "", "",  ],
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
                 1: [ "", "", "", "", "", "", "", "",  ], 
                 2: [ "", "", "./assets/img/Overlays/levelOne/x3y5f2p2.png", "./assets/img/Overlays/levelOne/x3y5f2p3.png", "./assets/img/Overlays/levelOne/x3y5f2p4.png", "", "", "",  ], //x3 y5
-                3: [ "", "./assets/img/Overlays/levelOne/x3y5f3p1.png", "./assets/img/Overlays/levelOne/x3y5f3p2.png", "", "", "", "", "",  ],
+                3: [ "", "./assets/img/Overlays/levelOne/x3y5f3p1.png", "./assets/img/Overlays/levelOne/x3y5f3p2.png", "./assets/img/Overlays/levelOne/x3y5f3p2.png", "./assets/img/Overlays/levelOne/x3y5f3p2.png", "", "", "",  ],
             },
             {
                 0: [ "", "", "", "", "", "", "", "",  ],
                 1: [ "", "", "", "", "", "", "", "",  ], 
                 2: [ "", "./assets/img/Overlays/levelOne/x3y6f2p1.png", "./assets/img/Overlays/levelOne/x3y6f2p2.png", "./assets/img/Overlays/levelOne/x3y6f2p3.png", "./assets/img/Overlays/levelOne/x3y6f2p4.png", "", "", "",  ], //x3 y6
-                3: [ "", "./assets/img/Overlays/levelOne/x3y6f3p1.png", "./assets/img/Overlays/levelOne/x3y6f3p2.png", "", "", "", "", "",  ],
+                3: [ "", "./assets/img/Overlays/levelOne/x3y6f3p1.png", "./assets/img/Overlays/levelOne/x3y6f3p2.png", "./assets/img/Overlays/levelOne/x3y6f3p2.png", "./assets/img/Overlays/levelOne/x3y6f3p2.png", "", "", "",  ],
             },
         ],
     },
@@ -394,6 +394,7 @@ const imageMaker = (array) => {
     const screenContainer = document.getElementById('screenContainer')
     const backgroundImage = document.createElement("img")
     const addedOverlay = document.createElement("img")
+    const addedOverlayTwo = document.createElement("img")
     // lightNumber used to give each image a unique ID to be interacted with
     let lightNumber = 1
     // Map the images in to the screenContainer
@@ -408,8 +409,11 @@ const imageMaker = (array) => {
     // Add it to the game screen, since innterHTML just wiped everything.
     screenContainer.appendChild(backgroundImage)
     addedOverlay.src = ""
+    addedOverlayTwo.src = ""
     addedOverlay.setAttribute("id", "overlay")
+    addedOverlayTwo.setAttribute("id", "overlay2")
     screenContainer.appendChild(addedOverlay)
+    screenContainer.appendChild(addedOverlayTwo)
     enablePuzzleButtons()
 }
 

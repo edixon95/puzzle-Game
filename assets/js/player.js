@@ -30,6 +30,7 @@ const playerTurnRight = () => {
     savePosition()
     exploreCameraRefresh()
     selectPuzzle()
+    document.getElementById('overlay2').src = ""
 }
 
 const playerTurnLeft = () => {
@@ -40,6 +41,7 @@ const playerTurnLeft = () => {
     savePosition()
     exploreCameraRefresh()
     selectPuzzle()
+    document.getElementById('overlay2').src = ""
 }
 
 const playerMoveForward = () => {
@@ -58,6 +60,7 @@ const playerMoveForward = () => {
     resetPosition()
     exploreCameraRefresh()
     selectPuzzle()
+    document.getElementById('overlay2').src = ""
 }
 
 // Save position after turning and moving forward (only after checking if out of bounds)
@@ -135,7 +138,7 @@ const startGame = () => {
 const interactButton = () => {
     const facingPuzzle = JSON.parse(localStorage.getItem("facingPuzzle"))
     const puzzleCheck = JSON.parse(localStorage.getItem("puzzleTrack")) || {}
-    const gameScreen = document.getElementById('gameScreen') // Not used yet, but will be used to say that you can't attempt puzzle yet
+    const overlay2 = document.getElementById('overlay2') // Not used yet, but will be used to say that you can't attempt puzzle yet
     // This is so I stop breaking things
     // if puzzles complete is equal to or greater than the puzzle being faced(-1), run
     // Puzzles complete starts at 0. Player will always have one less puzzle complete than next puzzle to be done.
@@ -150,7 +153,7 @@ const interactButton = () => {
     }
     else{
         console.log("Stop breaking")
-        // To do: add in function and image structure to show in this event
+        overlay2.src = "./assets/img/menus/nosig.png"
     }
 }
 
@@ -196,6 +199,11 @@ export const backButtonFunction = () => {
     addedOverlay.src = ""
     addedOverlay.setAttribute("id", "overlay")
     screenContainer.appendChild(addedOverlay)
+
+    const anotherOverlay = document.createElement("img")
+    anotherOverlay.src = ""
+    anotherOverlay.setAttribute("id", "overlay2")
+    screenContainer.appendChild(anotherOverlay)
     // Update local storage, then update the camera
     savePosition()
     exploreCameraRefresh()
